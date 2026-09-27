@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "arm32-kmdf",
+            "displayName": "ARM32 KMDF 1.11 driver (Windows Phone 8.1)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
+            "architecture": {
+                "value": "arm",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_LINKER": "C:/Program Files/LLVM/bin/lld-link.exe",
+                "CMAKE_C_FLAGS": "--target=armv7-pc-windows-msvc",
+                "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "arm32-kmdf",
+            "configurePreset": "arm32-kmdf"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+  "configurations": [
+    {
+      "name": "WP8.1-ARM32-KMDF",
+      "includePath": [
+        "${workspaceFolder}/src",
+        "C:/Program Files (x86)/Windows Kits/8.1/Include/wdf/kmdf/1.11",
+        "C:/Program Files (x86)/Windows Kits/8.1/Include/km/crt",
+        "C:/Program Files (x86)/Windows Phone Kits/8.1/Include/um",
+        "C:/Program Files (x86)/Windows Phone Kits/8.1/Include/um/minwin"
+      ],
+      "defines": [
+        "_WIN32",
+        "_ARM_=1",
+        "_KERNEL_MODE=1",
+        "WINNT=1",
+        "NTDDI_VERSION=0x06030000",
+        "_WIN32_WINNT=0x0603",
+        "WINVER=0x0603",
+        "KMDF_VERSION_MAJOR=1",
+        "KMDF_VERSION_MINOR=11",
+        "DEPRECATE_DDK_FUNCTIONS=1",
+        "WDF_DEVICE_NO_WDMSEC_H"
+      ],
+      "compilerPath": "C:/Program Files/LLVM/bin/clang-cl.exe",
+      "compilerArgs": [
+        "--target=armv7-pc-windows-msvc"
+      ],
+      "cStandard": "c11",
+      "intelliSenseMode": "windows-clang-arm"
+    }
+  ],
+  "version": 4
+}
