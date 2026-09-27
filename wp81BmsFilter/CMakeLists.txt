@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
-project(wp81BmsFilter C)
+
+# Use the name of the current source directory as the project/target name
+get_filename_component(APP_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+
+project(${APP_NAME} C)
 
 # Kernel-mode KMDF 1.11 driver for Windows Phone 8.1 (ARM), built with LLVM
 # (clang-cl + lld-link, see CMakePresets.json).
@@ -17,14 +21,14 @@ set(CMAKE_C_STANDARD_LIBRARIES "")
 set(CMAKE_CREATE_CONSOLE_EXE "")
 
 file(GLOB SOURCES CONFIGURE_DEPENDS "src/*.c")
-add_executable(wp81BmsFilter ${SOURCES})
+add_executable(${APP_NAME} ${SOURCES})
 
-set_target_properties(wp81BmsFilter PROPERTIES
+set_target_properties(${APP_NAME} PROPERTIES
     SUFFIX ".sys"
     MSVC_RUNTIME_LIBRARY "MultiThreaded"
 )
 
-target_compile_definitions(wp81BmsFilter PRIVATE
+target_compile_definitions(${APP_NAME} PRIVATE
     _ARM_=1
     _KERNEL_MODE=1
     WINNT=1
@@ -39,14 +43,14 @@ target_compile_definitions(wp81BmsFilter PRIVATE
 
 # SYSTEM -> passed as /imsvc, so warnings inside the kit headers are not reported.
 # um\minwin is only needed for apiset.h; it comes after um so um's ntdef.h wins.
-target_include_directories(wp81BmsFilter SYSTEM PRIVATE
+target_include_directories(${APP_NAME} SYSTEM PRIVATE
     "${WDK_ROOT}/Include/wdf/kmdf/1.${KMDF_MINOR}"
     "${WDK_ROOT}/Include/km/crt"
     "${PHONE_KIT_ROOT}/Include/um"
     "${PHONE_KIT_ROOT}/Include/um/minwin"
 )
 
-target_compile_options(wp81BmsFilter PRIVATE
+target_compile_options(${APP_NAME} PRIVATE
     /W4
     /Zl                 # no default CRT library references
     /GS-                # no stack cookies (FxDriverEntry does not initialise them)
@@ -55,12 +59,12 @@ target_compile_options(wp81BmsFilter PRIVATE
     /clang:-mno-implicit-float   # no compiler-generated VFP/NEON use in kernel code
 )
 
-target_link_directories(wp81BmsFilter PRIVATE
+target_link_directories(${APP_NAME} PRIVATE
     "${WDK_ROOT}/Lib/winv6.3/km/arm"
     "${WDK_ROOT}/Lib/wdf/kmdf/arm/1.${KMDF_MINOR}"
 )
 
-target_link_options(wp81BmsFilter PRIVATE
+target_link_options(${APP_NAME} PRIVATE
     /DRIVER
     /SUBSYSTEM:NATIVE,6.03
     /ENTRY:FxDriverEntry
@@ -74,7 +78,7 @@ target_link_options(wp81BmsFilter PRIVATE
     /TSAWARE:NO
 )
 
-target_link_libraries(wp81BmsFilter PRIVATE
+target_link_libraries(${APP_NAME} PRIVATE
     ntoskrnl.lib
     hal.lib
     BufferOverflowFastFailK.lib
