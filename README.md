@@ -37,7 +37,7 @@ Output: `build\wp81BmsFilter.sys` (ARM Thumb-2, native subsystem 6.3, imports on
   ```
 4. Reboot. The BMS driver disables PnP stop/remove, so the stack is only rebuilt at boot.
 
-The driver must be signed in a way the device accepts (or test signing enabled).
+The driver must be [test-signed](https://github.com/fredericGette/wp81documentation/blob/main/DriverBuilding/README.md#signing-on-the-computer).
 
 ## ETW provider
 
