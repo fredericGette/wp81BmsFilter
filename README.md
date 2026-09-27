@@ -1,6 +1,6 @@
 # wp81BmsFilter
 
-KMDF 1.11 upper filter for the Qualcomm PMIC BMS driver on Windows Phone 8.1
+KMDF 1.11 upper filter for the Qualcomm PMIC BMS (Battery Management System) driver on Windows Phone 8.1
 (device type `0x8018`, symbolic link `\\.\QCOMPMICBMS`). It logs every
 `IRP_MJ_DEVICE_CONTROL` sent to the BMS device to ETW and passes the request
 on unchanged. All other request types go straight through.
